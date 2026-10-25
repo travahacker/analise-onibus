@@ -1,0 +1,31 @@
+{
+  "_aviso": "AMOSTRA FICTÍCIA no formato da resposta de GET /Posicao. Nenhum dado real. Os campos _aviso e _campos não existem na API.",
+  "_campos": {
+    "hr": "hora local da consulta (HH:MM)",
+    "l[].c": "letreiro da linha, igual ao route_id do GTFS (ex.: 8000-10)",
+    "l[].cl": "código da linha por sentido (cada sentido tem um cl)",
+    "l[].sl": "sentido: 1 principal para secundário, 2 o inverso",
+    "l[].lt0 / lt1": "destino e origem da linha",
+    "l[].qv": "quantidade de veículos localizados",
+    "vs[].p": "prefixo do veículo",
+    "vs[].a": "veículo acessível (true ou false)",
+    "vs[].ta": "instante da posição, em UTC (ISO 8601)",
+    "vs[].py / px": "latitude e longitude"
+  },
+  "hr": "16:31",
+  "l": [
+    {
+      "c": "8000-10", "cl": 1273, "sl": 1, "lt0": "TERMINAL LAPA", "lt1": "PCA.RAMOS DE AZEVEDO", "qv": 2,
+      "vs": [
+        {"p": 11001, "a": true, "ta": "2026-10-25T19:31:20Z", "py": -23.5301, "px": -46.7102, "sv": null, "is": null},
+        {"p": 11002, "a": false, "ta": "2026-10-25T19:31:24Z", "py": -23.5455, "px": -46.6620, "sv": null, "is": null}
+      ]
+    },
+    {
+      "c": "8000-10", "cl": 34041, "sl": 2, "lt0": "PCA.RAMOS DE AZEVEDO", "lt1": "TERMINAL LAPA", "qv": 1,
+      "vs": [
+        {"p": 11003, "a": true, "ta": "2026-10-25T19:31:22Z", "py": -23.5412, "px": -46.6811, "sv": null, "is": null}
+      ]
+    }
+  ]
+}
