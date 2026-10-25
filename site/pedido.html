@@ -7,6 +7,7 @@
 <meta name="description" content="Modelo de pedido de acesso à informação para obter da SPTrans os dados de frota e GPS de 04/10, 18/10 e 25/10 de 2026.">
 <link rel="canonical" href="https://travahacker.com.br/analise-onibus/pedido.html">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="stylesheet" href="voluntariado-ticker.css">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#0e0e0d">
 <meta property="og:type" content="website">
@@ -38,7 +39,9 @@ button,.btn{background:var(--s1);color:#fff;border:0;border-radius:6px;padding:8
 .aviso{border-left:4px solid var(--warn);padding:8px 12px;background:var(--surface);color:var(--ink2);font-size:.92rem}
 </style>
 </head>
-<body><main>
+<body>
+<aside class="network-ticker" aria-label="Projetos do Voluntariado Eleições 2026"><a class="ticker-label" href="https://travahacker.com.br/voluntariado/">Voluntariado · Eleições 2026 <span aria-hidden="true">→</span></a><div class="ticker-window"><div class="ticker-track"><div class="ticker-set"><a href="https://votedemocracia.com.br/">Vote pela democracia</a><a href="https://deolhonameta.com.br/">De Olho na Meta</a><a href="https://travahacker.com.br/deolhonotse/">De Olho no TSE</a><a href="https://travahacker.com.br/mapa-ia-soberana/">Mapa da IA Soberana</a><a href="https://www.youtube.com/live/DtlQigD4UoA">Desinfluência Digital</a><a href="https://travahacker.com.br/eleicoes2026/">Apuração do 1º turno</a><a class="current" aria-current="page" href="https://travahacker.com.br/analise-onibus/">Ônibus de SP na eleição</a><a href="https://codigonaobinario.org/curso-ia">Curso de IA <small>bônus</small></a></div><div class="ticker-set" aria-hidden="true"><a tabindex="-1" href="https://votedemocracia.com.br/">Vote pela democracia</a><a tabindex="-1" href="https://deolhonameta.com.br/">De Olho na Meta</a><a tabindex="-1" href="https://travahacker.com.br/deolhonotse/">De Olho no TSE</a><a tabindex="-1" href="https://travahacker.com.br/mapa-ia-soberana/">Mapa da IA Soberana</a><a tabindex="-1" href="https://www.youtube.com/live/DtlQigD4UoA">Desinfluência Digital</a><a tabindex="-1" href="https://travahacker.com.br/eleicoes2026/">Apuração do 1º turno</a><a tabindex="-1" href="https://travahacker.com.br/analise-onibus/">Ônibus de SP na eleição</a><a tabindex="-1" href="https://codigonaobinario.org/curso-ia">Curso de IA <small>bônus</small></a></div></div></div></aside>
+<main>
 <nav class="menu" aria-label="Seções"><a href="./">Painel</a><a href="pedido.html" aria-current="page">Pedido à SPTrans</a></nav>
 <h1>Pedido de dados à SPTrans</h1>
 <p>A API pública do Olho Vivo só informa a posição atual dos ônibus. Para comparar 25/10 com 18/10 e com um dia útil, é preciso que a SPTrans entregue os registros operacionais desses dias. Este modelo pede esses dados pela Lei de Acesso à Informação.</p>
