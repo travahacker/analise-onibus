@@ -32,6 +32,28 @@
     try { localStorage.setItem("tema", root.dataset.theme); } catch (e) {}
   };
 
+  // aparência: três layouts (painel, jornal, bloco), lembrados no navegador e aceitos por ?tema=
+  (function aparencia() {
+    const btn = $("ap-btn"), menu = $("ap-menu"), meta = document.querySelector('meta[name="theme-color"]');
+    const cores = {painel: "#0e0e0d", jornal: "#f5f5ef", bloco: "#f1efe8"};
+    const marca = () => {
+      const atual = root.dataset.layout || "painel";
+      menu.querySelectorAll("button").forEach((b) => b.setAttribute("aria-checked", b.dataset.layout === atual));
+      if (meta) meta.setAttribute("content", cores[atual]);
+    };
+    const fecha = () => { menu.classList.remove("aberto"); btn.setAttribute("aria-expanded", "false"); };
+    btn.onclick = (e) => { e.stopPropagation(); const a = menu.classList.toggle("aberto"); btn.setAttribute("aria-expanded", a); if (a) menu.querySelector('[aria-checked="true"]').focus(); };
+    menu.querySelectorAll("button").forEach((b) => (b.onclick = () => {
+      root.dataset.layout = b.dataset.layout;
+      try { localStorage.setItem("layout", b.dataset.layout); } catch (e) {}
+      try { const u = new URL(location.href); u.searchParams.set("tema", b.dataset.layout); history.replaceState(null, "", u); } catch (e) {}
+      marca(); fecha(); btn.focus();
+    }));
+    document.addEventListener("click", (e) => { if (!e.target.closest(".aparencia")) fecha(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") { fecha(); btn.focus(); } });
+    marca();
+  })();
+
   // dados
   const get = async (u) => { try { const r = await fetch(u + "?" + Date.now()); return r.ok ? await r.json() : null; } catch (e) { return null; } };
   const series0 = (await get("data/series.json")) || {dias: [], coletas: 0, ultima_coleta: null};
