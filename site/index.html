@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-layout="bloco">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -9,7 +9,7 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="stylesheet" href="voluntariado-ticker.css">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="theme-color" content="#0e0e0d">
+<meta name="theme-color" content="#f1efe8">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="Travahacker">
@@ -109,23 +109,13 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:22px 0 56px;colo
 @media (prefers-reduced-motion:reduce){.dot{animation:none}html{scroll-behavior:auto}}
 </style>
 <link rel="stylesheet" href="temas.css">
-<script>(function(){var e=document.documentElement,v=["painel","jornal","bloco"],x="painel";try{var q=new URLSearchParams(location.search).get("tema"),l=localStorage.getItem("layout");x=v.indexOf(q)>-1?q:(v.indexOf(l)>-1?l:"painel")}catch(_){}e.setAttribute("data-layout",x)})()</script>
 </head>
 <body>
 <aside class="network-ticker" aria-label="Projetos do Voluntariado Eleições 2026"><a class="ticker-label" href="https://travahacker.com.br/voluntariado/">Voluntariado · Eleições 2026 <span aria-hidden="true">→</span></a><div class="ticker-window"><div class="ticker-track"><div class="ticker-set"><a href="https://votedemocracia.com.br/">Vote pela democracia</a><a href="https://deolhonameta.com.br/">De Olho na Meta</a><a href="https://travahacker.com.br/deolhonotse/">De Olho no TSE</a><a href="https://travahacker.com.br/mapa-ia-soberana/">Mapa da IA Soberana</a><a href="https://www.youtube.com/live/DtlQigD4UoA">Desinfluência Digital</a><a href="https://travahacker.com.br/eleicoes2026/">Apuração do 1º turno</a><a class="current" aria-current="page" href="https://travahacker.com.br/analise-onibus/">Ônibus de SP na eleição</a><a href="https://codigonaobinario.org/curso-ia">Curso de IA <small>bônus</small></a></div><div class="ticker-set" aria-hidden="true"><a tabindex="-1" href="https://votedemocracia.com.br/">Vote pela democracia</a><a tabindex="-1" href="https://deolhonameta.com.br/">De Olho na Meta</a><a tabindex="-1" href="https://travahacker.com.br/deolhonotse/">De Olho no TSE</a><a tabindex="-1" href="https://travahacker.com.br/mapa-ia-soberana/">Mapa da IA Soberana</a><a tabindex="-1" href="https://www.youtube.com/live/DtlQigD4UoA">Desinfluência Digital</a><a tabindex="-1" href="https://travahacker.com.br/eleicoes2026/">Apuração do 1º turno</a><a tabindex="-1" href="https://travahacker.com.br/analise-onibus/">Ônibus de SP na eleição</a><a tabindex="-1" href="https://codigonaobinario.org/curso-ia">Curso de IA <small>bônus</small></a></div></div></div></aside>
 <header class="top"><div class="wrap">
   <a class="brand" href="./">Ônibus de SP na eleição</a>
   <nav class="menu" aria-label="Seções"><a href="./" aria-current="page">Painel</a><a href="pedido.html">Pedido à SPTrans</a></nav>
-  <div class="aparencia">
-    <button id="ap-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="ap-menu" title="Escolher aparência"><span class="ap-sw" aria-hidden="true"><i style="background:#d95926"></i><i style="background:#173b38"></i><i style="background:#ffc400"></i></span><span class="ap-txt">Aparência</span></button>
-    <div id="ap-menu" role="menu" aria-label="Aparência do painel">
-      <button type="button" role="menuitemradio" data-layout="painel" aria-checked="true"><span class="ap-prev ap-painel"><i></i><span><u></u><u></u></span></span><span><b>Painel</b><small>Cartões, modo escuro e claro</small></span></button>
-      <button type="button" role="menuitemradio" data-layout="jornal" aria-checked="false"><span class="ap-prev ap-jornal"><i></i><span><u></u><u></u></span></span><span><b>Jornal</b><small>Leitura editorial, coluna estreita</small></span></button>
-      <button type="button" role="menuitemradio" data-layout="bloco" aria-checked="false"><span class="ap-prev ap-bloco"><i></i><span><u></u><u></u></span></span><span><b>Bloco</b><small>Contornos grossos, destaque amarelo</small></span></button>
-    </div>
-  </div>
-  <button id="tema" type="button" aria-label="Alternar tema claro e escuro" title="Alternar tema">◐</button>
-</div></header>
+  </div></header>
 
 <main class="wrap">
 <div class="hero">
