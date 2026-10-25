@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Os ônibus de SP circularam normalmente na eleição?</title>
+<meta name="description" content="Medição própria por GPS (API Olho Vivo, SPTrans) de quantos ônibus e linhas rodaram no 2º turno, comparada a domingos normais e dias úteis.">
+<link rel="canonical" href="https://travahacker.com.br/analise-onibus/">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#0e0e0d">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Travahacker">
+<meta property="og:title" content="Os ônibus de SP circularam normalmente no domingo da eleição?">
+<meta property="og:description" content="Medição própria por GPS (API Olho Vivo, SPTrans) de quantos ônibus e linhas rodaram no 2º turno, comparada a domingos normais e dias úteis.">
+<meta property="og:url" content="https://travahacker.com.br/analise-onibus/">
+<meta property="og:image" content="https://travahacker.com.br/analise-onibus/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Os ônibus de SP circularam normalmente no domingo da eleição? Auditoria independente com dados de GPS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Os ônibus de SP circularam normalmente no domingo da eleição?">
+<meta name="twitter:description" content="Medição própria por GPS (API Olho Vivo, SPTrans) de quantos ônibus e linhas rodaram no 2º turno, comparada a domingos normais e dias úteis.">
+<meta name="twitter:image" content="https://travahacker.com.br/analise-onibus/og.png">
+<meta name="twitter:image:alt" content="Os ônibus de SP circularam normalmente no domingo da eleição? Auditoria independente com dados de GPS">
+<style>
+:root{color-scheme:light;--bg:#f4f3ef;--surface:#fff;--surface2:#f8f7f4;--ink:#10100f;--ink2:#55534f;--ink3:#8a8780;--line:#e4e2dc;--accent:#2a78d6;--s-eleicao:#eb6834;--s-domingo:#2a78d6;--s-util:#1baf7a;--s-sabado:#eda100;--s-turno1:#e87ba4;--warn:#8a5a00;--shadow:0 1px 2px #0000000d,0 8px 24px #00000008}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#0e0e0d;--surface:#171716;--surface2:#1d1d1b;--ink:#f0efec;--ink2:#c3c2b7;--ink3:#8d8b83;--line:#2b2a27;--accent:#3987e5;--s-eleicao:#d95926;--s-domingo:#3987e5;--s-util:#199e70;--s-sabado:#c98500;--s-turno1:#d55181;--warn:#e0a63a;--shadow:none}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#0e0e0d;--surface:#171716;--surface2:#1d1d1b;--ink:#f0efec;--ink2:#c3c2b7;--ink3:#8d8b83;--line:#2b2a27;--accent:#3987e5;--s-eleicao:#d95926;--s-domingo:#3987e5;--s-util:#199e70;--s-sabado:#c98500;--s-turno1:#d55181;--warn:#e0a63a;--shadow:none}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+header.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;gap:20px;height:52px}
+.brand{font-weight:700;letter-spacing:-.01em;color:var(--ink);text-decoration:none;white-space:nowrap}
+nav.menu{display:flex;gap:4px;margin-left:auto;font-size:.92rem}
+nav.menu a{color:var(--ink2);text-decoration:none;padding:6px 12px;border-radius:999px}
+nav.menu a:hover{background:var(--surface2);color:var(--ink)}
+nav.menu a[aria-current=page]{background:var(--ink);color:var(--bg)}
+#tema{border:1px solid var(--line);background:var(--surface);color:var(--ink2);border-radius:999px;width:34px;height:34px;cursor:pointer;font-size:15px}
+.hero{padding:44px 0 8px}
+.eyebrow{display:inline-flex;gap:8px;align-items:center;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);font-weight:600}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--s-util);box-shadow:0 0 0 0 #1baf7a88;animation:pulse 2s infinite}
+.dot.off{background:var(--ink3);animation:none}
+@keyframes pulse{70%{box-shadow:0 0 0 8px #1baf7a00}100%{box-shadow:0 0 0 0 #1baf7a00}}
+h1{font-size:clamp(1.9rem,5vw,3rem);line-height:1.08;letter-spacing:-.03em;margin:.35em 0 .4em;max-width:19em}
+.lead{font-size:1.1rem;color:var(--ink2);max-width:46em;margin:0 0 18px}
+.pill{display:inline-block;font-size:.85rem;color:var(--ink2);background:var(--surface);border:1px solid var(--line);padding:6px 12px;border-radius:999px}
+h2{font-size:1.35rem;letter-spacing:-.02em;margin:0 0 4px}
+section{margin:44px 0}
+.sub{color:var(--ink2);margin:0 0 16px;max-width:50em}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow)}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.cobertura{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink2)}
+.chip i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.chip.vazio{border-style:dashed;color:var(--ink3)}
+.resp{position:relative;overflow:hidden}
+.resp::before{content:"";position:absolute;inset:0 auto 0 0;width:5px;background:var(--cor,var(--line))}
+.resp h3{margin:0;font-size:.95rem;color:var(--ink2);font-weight:600}
+.resp .big{font-size:2.6rem;line-height:1.1;font-weight:700;letter-spacing:-.03em;font-variant-numeric:tabular-nums;margin:6px 0 2px}
+.resp .big small{font-size:.9rem;font-weight:500;color:var(--ink2);letter-spacing:0}
+.resp .meta{font-size:.86rem;color:var(--ink2)}
+.resp .wait{font-size:1.25rem;font-weight:600;color:var(--ink3);margin:10px 0 4px}
+.delta{display:inline-block;margin-top:10px;font-size:.85rem;font-weight:600;padding:4px 10px;border-radius:8px;background:var(--surface2);color:var(--ink)}
+.delta.neutro{color:var(--ink3);font-weight:500}
+.seg{display:inline-flex;background:var(--surface2);border:1px solid var(--line);border-radius:999px;padding:3px;margin:0 0 12px}
+.seg button{border:0;background:transparent;color:var(--ink2);padding:6px 14px;border-radius:999px;font:inherit;font-size:.88rem;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.leg{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.88rem;color:var(--ink2);margin:0 0 6px}
+.leg i{display:inline-block;width:16px;height:4px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.explica{font-size:.88rem;color:var(--ink2);margin:6px 0 0}
+svg{width:100%;height:auto;display:block}svg text{fill:var(--ink3);font-size:11px}
+#tip{position:fixed;pointer-events:none;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:.82rem;display:none;box-shadow:0 8px 24px #0003;z-index:9}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);color:var(--ink2);vertical-align:top}
+th{color:var(--ink);font-weight:600}td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.tw{overflow-x:auto}
+select{background:var(--surface2);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;font:inherit;font-size:.9rem}
+label{color:var(--ink2);font-size:.9rem;margin-right:14px}
+.bars .row{display:grid;grid-template-columns:150px 1fr 120px;gap:10px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line);font-size:.88rem;color:var(--ink2)}
+.bars .row:last-child{border:0}
+.bars .b{height:9px;border-radius:0 5px 5px 0;margin:2px 0;min-width:2px}
+.bars .v{text-align:right;font-variant-numeric:tabular-nums;color:var(--ink)}
+.aviso{border-left:4px solid var(--warn);padding:10px 14px;background:var(--surface);border-radius:0 12px 12px 0;color:var(--ink2);font-size:.92rem}
+details{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:0 16px;margin:10px 0}
+details summary{cursor:pointer;padding:13px 0;font-weight:600;color:var(--ink)}
+details[open]{padding-bottom:12px}
+details p,details li{color:var(--ink2);font-size:.95rem}
+footer{border-top:1px solid var(--line);margin-top:56px;padding:22px 0 56px;color:var(--ink3);font-size:.88rem}
+.veredito{border:1px solid var(--line);border-left:6px solid var(--s-eleicao);border-radius:18px;background:var(--surface);padding:22px;box-shadow:var(--shadow)}
+.veredito .tag{display:inline-block;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;font-weight:700;color:var(--s-eleicao);margin-bottom:6px}
+.veredito h2{font-size:clamp(1.3rem,3.6vw,1.8rem);line-height:1.2;margin:0 0 10px}
+.veredito p{margin:6px 0;color:var(--ink2)}
+.veredito p b{color:var(--ink)}
+.ok{color:var(--s-util)}.nao{color:var(--s-eleicao)}
+.passo{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:14px}
+.passo div{background:var(--surface2);border-radius:12px;padding:12px 14px;font-size:.9rem;color:var(--ink2)}
+.passo b{display:block;color:var(--ink);margin-bottom:2px}
+.passos{counter-reset:p;list-style:none;padding:0;margin:14px 0}
+.passos>li{counter-increment:p;position:relative;padding:14px 16px 14px 56px;margin:10px 0;background:var(--surface);border:1px solid var(--line);border-radius:14px;color:var(--ink2);font-size:.95rem}
+.passos>li::before{content:counter(p);position:absolute;left:16px;top:14px;width:28px;height:28px;border-radius:50%;background:var(--ink);color:var(--bg);font-weight:700;font-size:.9rem;display:flex;align-items:center;justify-content:center}
+.passos li b{color:var(--ink)}
+.passos ul{margin:8px 0 0;padding-left:18px;list-style:disc}.passos ul li{padding:3px 0;font-size:.93rem}
+@media (max-width:560px){header.top .wrap{gap:8px}.brand{overflow:hidden;text-overflow:ellipsis;min-width:0;font-size:.95rem}nav.menu{flex-shrink:0}nav.menu a{white-space:nowrap;padding:6px 10px;font-size:.85rem}.card{padding:16px}.seg{display:flex}.seg button{flex:1;padding:6px 6px;font-size:.8rem}.bars .row{grid-template-columns:96px 1fr 96px}.resp .big{font-size:2.2rem}}
+@media (prefers-reduced-motion:reduce){.dot{animation:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="./">Ônibus de SP na eleição</a>
+  <nav class="menu" aria-label="Seções"><a href="./" aria-current="page">Painel</a><a href="pedido.html">Pedido à SPTrans</a></nav>
+  <button id="tema" type="button" aria-label="Alternar tema claro e escuro" title="Alternar tema">◐</button>
+</div></header>
+
+<main class="wrap">
+<div class="hero">
+  <span class="eyebrow"><span class="dot off" id="dot"></span><span id="eyebrow">Auditoria independente, dados do GPS dos ônibus</span></span>
+  <h1>Os ônibus de São Paulo circularam normalmente no domingo da eleição?</h1>
+  <p class="lead">Medimos pelo GPS quantos ônibus e linhas estavam rodando no domingo da eleição e comparamos com o que a Justiça exigiu: <b>100% da frota, com programação de dia útil</b>.</p>
+  <span class="pill" id="estado">Carregando…</span>
+</div>
+
+<section id="placar">
+  <div class="veredito" id="veredito"><span class="tag">Conclusão de hoje</span><h2>Carregando…</h2></div>
+  <div class="grid3" id="placar-cards" style="margin-top:14px"></div>
+</section>
+
+<section id="fluxo">
+  <h2>Ônibus ao longo do dia</h2>
+  <p class="sub">Ônibus ao mesmo tempo, em cada janela de 10 minutos medida. A faixa cinza marca a votação, 8h às 17h.</p>
+  <div class="card">
+    <div class="seg" role="group" aria-label="Medida">
+      <button type="button" data-m="op" aria-pressed="true">Ônibus operando</button>
+      <button type="button" data-m="mv" aria-pressed="false">Em movimento</button>
+      <button type="button" data-m="lin" aria-pressed="false">Linhas ativas</button>
+    </div>
+    <div class="leg" id="leg"></div>
+    <svg id="graf" viewBox="0 0 960 380" role="img" aria-label="Ônibus por horário e tipo de dia"></svg>
+    <p class="explica" id="explica"></p>
+    <p class="explica" id="leitura" style="color:var(--ink);font-weight:600"></p>
+    <details><summary>Ver como tabela</summary><div class="tw"><table id="tabela"></table></div></details>
+  </div>
+</section>
+
+<section id="declarado">
+  <h2>O que foi dito e o que foi medido</h2>
+  <p class="sub">Tudo o que a imprensa e as autoridades disseram, lado a lado com o que conseguimos verificar. Nada aqui foi conferido na fonte primária.</p>
+  <div class="card tw"><table id="decl"></table></div>
+</section>
+
+<section id="linhas">
+  <h2>Quais linhas</h2>
+  <p class="sub">O GTFS oficial da SPTrans diz quais linhas deveriam operar em dia útil. Aqui cruzamos isso com o que o GPS mostrou hoje.</p>
+  <div class="card">
+    <h3 style="margin:0 0 6px;font-size:1rem">Linhas de dia útil sem ônibus em movimento hoje</h3>
+    <strong id="semn"></strong>
+    <p class="explica" id="semt"></p>
+    <details><summary>Ver lista de linhas</summary><p id="sem"></p></details>
+  </div>
+</section>
+
+<section id="metodo">
+  <h2>Metodologia: como chegamos a estes números</h2>
+  <p class="sub">Em cinco passos, do dado bruto à conclusão.</p>
+  <ol class="passos">
+    <li><b>Coletamos a posição dos ônibus.</b> A cada 2 minutos o servidor consulta a API oficial Olho Vivo, da SPTrans, que informa a posição atual de cada ônibus com GPS ativo. Guardamos cada resposta original, sem alteração, com um hash SHA-256 encadeado ao registro anterior. Alterar uma coleta antiga quebra a cadeia, e o <a href="data/manifesto.json">manifesto</a> permite conferir isso. Os arquivos brutos ficam guardados no servidor e podem ser entregues para auditoria.</li>
+    <li><b>Definimos o que contar.</b>
+      <ul><li><b>Operando:</b> ônibus ligados a uma linha, com posição atualizada nos últimos 3 minutos, vistos ao mesmo tempo. É uma foto simultânea, não o total que rodou no dia. Inclui ônibus parados em ponto final (conferido: cerca de 35% ficam parados entre duas coletas, e 90% dos que não saem do lugar em 22 minutos estão a menos de 300 m de um terminal) e exclui garagem e ônibus sem GPS.</li>
+      <li><b>Em movimento:</b> ônibus operando que se deslocaram ao menos 50 m desde a coleta anterior.</li>
+      <li><b>Linha ativa:</b> um letreiro de linha (por exemplo 8000-10) com ao menos um ônibus em movimento em uma janela de 10 minutos.</li></ul></li>
+    <li><b>Medimos quais linhas rodaram.</b> Do GTFS oficial da SPTrans (<a href="codigo/atualizar_gtfs.sh.txt">baixado todo dia e guardado</a>) tiramos as linhas programadas para dia útil (1.325) e para domingo (1.025). Cerca de 300 linhas existem em dia útil e não no domingo. Se a ordem fosse cumprida, essas linhas deveriam estar rodando hoje. Contamos quantas tiveram ônibus em movimento entre 8h e 17h e fazemos a mesma conta para as linhas de domingo, que rodariam de qualquer jeito. A diferença entre os dois percentuais é o sinal. O percentual sobe com mais horas medidas, porque uma linha de intervalo longo pode não aparecer numa janela curta, e hoje só temos medição a partir das 16h30.</li>
+    <li><b>Usamos as medições de terceiros como foram publicadas.</b> Cebrap, BusInfo e o plano da Prefeitura entram com o que cada fonte diz medir, sem acesso aos dados deles e sem misturar os números, porque medem coisas diferentes. O BusInfo conta ônibus que "saíram da garagem", com método não divulgado. O Cebrap usa a mesma API que nós, mas compara com dias úteis e cobre a manhã. O nosso número é uma foto simultânea.</li>
+    <li><b>Só afirmamos o que várias medições sustentam.</b> Afirmamos uma direção quando fontes com métodos diferentes concordam e nenhuma indica o contrário. Aqui são quatro sinais, e por isso a direção tem confiança média a alta. O tamanho da diferença só vem do Cebrap (31,4%) e de um número do BusInfo (71%), então a confiança nele é menor. Não decidimos se houve descumprimento da ordem, que é uma decisão da Justiça, nem a intenção de ninguém.</li>
+  </ol>
+  <details open><summary>O que este painel não prova</summary>
+    <ul><li>Não medimos a manhã: nossa coleta começou às 16h30. Para esse período valem as medições de terceiros.</li>
+    <li>Só o Cebrap compara diretamente com dias úteis. O BusInfo e a nossa coleta são indícios por outros caminhos.</li>
+    <li>O número do BusInfo e o nosso não são comparáveis entre si.</li>
+    <li>Não há número oficial da SPTrans para hoje. Os dados oficiais podem ser pedidos <a href="pedido.html">por este modelo</a>.</li>
+    <li>Menos ônibus não prova intenção de ninguém nem, sozinho, descumprimento da ordem judicial.</li></ul></details>
+  <details><summary>Como conferir por conta própria</summary>
+    <p>O código de coleta, agregação e leitura do GTFS está publicado como texto: <a href="codigo/coletor.py.txt">coletor</a>, <a href="codigo/agregar.py.txt">agregação</a>, <a href="codigo/gtfs_ref.py.txt">GTFS</a> e <a href="codigo/atualizar_gtfs.sh.txt">atualização do GTFS</a> e <a href="codigo/verificar_manifesto.py.txt">verificador da cadeia de hashes</a>. Os dados agregados que alimentam esta página são <a href="data/series.json">series.json</a>, <a href="data/linhas.json">linhas.json</a> e <a href="data/gtfs_ref.json">gtfs_ref.json</a>. Qualquer pessoa com uma chave da API Olho Vivo pode repetir a coleta.</p></details>
+</section>
+
+
+</main>
+<footer><div class="wrap">Código de coleta e agregação publicado em <a href="#metodo">Metodologia</a> e independente de qualquer assistente de IA. Dados da API Olho Vivo e do GTFS da SPTrans. <a href="pedido.html">Pedido de dados à SPTrans</a>.</div></footer>
+<div id="tip"></div>
+<script src="app.js"></script>
+</body></html>

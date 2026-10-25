@@ -1,0 +1,29 @@
+Ao Serviço de Informação ao Cidadão da São Paulo Transporte S.A. (SPTrans), com cópia à Secretaria Municipal de Mobilidade e Transportes.
+
+Assunto: Pedido de acesso a dados operacionais do transporte coletivo por ônibus nos dias 04/10/2026, 18/10/2026, 21/10/2026 e 25/10/2026 (Lei nº 12.527/2011).
+
+Com base na Lei de Acesso à Informação (Lei nº 12.527/2011), na Lei nº 13.460/2017 e na decisão do TRE-SP de 24/10/2026 que determinou a operação integral da frota no dia 25/10/2026, solicito cópia dos dados abaixo, em formato aberto e legível por máquina (CSV, JSON ou Parquet), sem campos pessoais:
+
+1. Registros brutos de posicionamento (GPS/AVL) de todos os veículos do sistema, com identificador do veículo, linha, sentido, empresa operadora, data, hora, latitude e longitude, nos dias 04/10/2026 (domingo, primeiro turno), 18/10/2026 (domingo), 21/10/2026 (quarta-feira, dia útil de referência) e 25/10/2026 (domingo, segundo turno).
+
+2. Frota programada e frota efetivamente operada, por linha, empresa e faixa horária de uma hora, nos mesmos dias, incluindo a frota total exigida pela decisão judicial e o critério usado para calculá-la.
+
+3. Viagens programadas, realizadas e suprimidas, por linha, empresa e faixa horária, nos mesmos dias, com o motivo registrado para cada supressão.
+
+4. Intervalos programados e efetivamente praticados entre veículos (mediana e percentil 90), por linha e faixa horária, das 5h às 24h, nos mesmos dias.
+
+5. Registros de saída e recolhimento de veículos de cada garagem, com horário, nos mesmos dias.
+
+6. Comunicações, ordens de serviço e planos operacionais expedidos pela SPTrans e pela Secretaria Municipal de Mobilidade e Transportes às empresas operadoras sobre a operação de 25/10/2026, incluindo o cronograma de reorganização da frota após a decisão do TRE-SP.
+
+7. Demonstrativo de passageiros transportados por linha nos mesmos dias, com a separação entre pagantes e gratuidades, caso ainda não publicado.
+
+8. As definições formais usadas pela SPTrans para "frota patrimonial", "frota operacional", "frota monitorada", "frota em circulação" e "frota operante", e o texto da Carta Circular DT/SRT nº 005/2026, de 24/10/2026.
+
+Havendo dado que a SPTrans entenda sigiloso, peço a disponibilização da parte não sigilosa e a indicação do dispositivo legal que fundamenta a restrição, conforme o art. 7º, § 2º, da Lei nº 12.527/2011. Peço também que os dados sejam enviados por meio eletrônico, nos termos do art. 11, § 5º.
+
+Prazo legal de resposta: 20 dias, prorrogáveis por mais 10 mediante justificativa (art. 11, §§ 1º e 2º).
+
+Nome do solicitante: [NOME]
+Contato: [E-MAIL]
+Data: [DATA]

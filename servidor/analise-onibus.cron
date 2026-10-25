@@ -1,0 +1,5 @@
+# Coleta a cada 2 min, agrega a cada 5. Token em /etc/analise-onibus.env
+*/2 * * * * root set -a; . /etc/analise-onibus.env; set +a; /usr/bin/python3.11 /opt/analise-onibus/coletor.py >> /var/log/analise-onibus.log 2>&1
+*/5 * * * * root /usr/bin/python3.11 /opt/analise-onibus/agregar.py >> /var/log/analise-onibus.log 2>&1
+# GTFS oficial: uma vez por dia, 06:10 (America/Sao_Paulo = 09:10 UTC)
+10 9 * * * root /opt/analise-onibus/atualizar_gtfs.sh >> /var/log/analise-onibus.log 2>&1

@@ -1,0 +1,7 @@
+# gerados por ./deploy.sh ou pelo servidor, não versionar
+site/data/
+site/codigo/
+__pycache__/
+*.tmp
+*.env
+*.key

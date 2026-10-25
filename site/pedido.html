@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pedido de dados à SPTrans: modelo pronto</title>
+<meta name="description" content="Modelo de pedido de acesso à informação para obter da SPTrans os dados de frota e GPS de 04/10, 18/10 e 25/10 de 2026.">
+<link rel="canonical" href="https://travahacker.com.br/analise-onibus/pedido.html">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#0e0e0d">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Travahacker">
+<meta property="og:title" content="Pedido de dados à SPTrans: modelo pronto (LAI)">
+<meta property="og:description" content="Modelo de pedido de acesso à informação para obter da SPTrans os dados de frota e GPS de 04/10, 18/10 e 25/10 de 2026.">
+<meta property="og:url" content="https://travahacker.com.br/analise-onibus/pedido.html">
+<meta property="og:image" content="https://travahacker.com.br/analise-onibus/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Os ônibus de SP circularam normalmente no domingo da eleição? Auditoria independente com dados de GPS">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Pedido de dados à SPTrans: modelo pronto (LAI)">
+<meta name="twitter:description" content="Modelo de pedido de acesso à informação para obter da SPTrans os dados de frota e GPS de 04/10, 18/10 e 25/10 de 2026.">
+<meta name="twitter:image" content="https://travahacker.com.br/analise-onibus/og.png">
+<meta name="twitter:image:alt" content="Os ônibus de SP circularam normalmente no domingo da eleição? Auditoria independente com dados de GPS">
+<style>
+:root{color-scheme:light;--bg:#f6f5f2;--surface:#fcfcfb;--ink:#0b0b0b;--ink2:#52514e;--grid:#e3e2dd;--s1:#2a78d6;--warn:#8a5a00}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#111110;--surface:#1a1a19;--ink:#f0efec;--ink2:#c3c2b7;--grid:#2e2d2a;--s1:#3987e5;--warn:#e0a63a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,sans-serif}
+main{max-width:820px;margin:0 auto;padding:24px 16px 64px}h1{font-size:1.6rem;margin:.2em 0}h2{font-size:1.1rem;margin:1.8em 0 .5em}
+p,li{color:var(--ink2)}a{color:var(--s1)}.card{background:var(--surface);border:1px solid var(--grid);border-radius:10px;padding:16px;margin:12px 0}
+nav.menu{display:flex;flex-wrap:wrap;gap:4px 18px;border-bottom:1px solid var(--grid);padding-bottom:10px;margin-bottom:8px;font-size:.95rem}nav.menu a{color:var(--ink2);text-decoration:none;padding:2px 0}nav.menu a[aria-current=page]{color:var(--ink);border-bottom:2px solid var(--s1)}nav.menu a:hover{color:var(--ink)}
+nav.sub{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.88rem;margin:6px 0 14px}nav.sub a{color:var(--ink2)}
+pre{white-space:pre-wrap;word-wrap:break-word;font:inherit;font-size:.92rem;color:var(--ink);margin:0}
+button,.btn{background:var(--s1);color:#fff;border:0;border-radius:6px;padding:8px 14px;font:inherit;font-size:.9rem;cursor:pointer;text-decoration:none;display:inline-block}
+.btn.sec{background:transparent;color:var(--ink);border:1px solid var(--grid)}.acoes{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.aviso{border-left:4px solid var(--warn);padding:8px 12px;background:var(--surface);color:var(--ink2);font-size:.92rem}
+</style>
+</head>
+<body><main>
+<nav class="menu" aria-label="Seções"><a href="./">Painel</a><a href="pedido.html" aria-current="page">Pedido à SPTrans</a></nav>
+<h1>Pedido de dados à SPTrans</h1>
+<p>A API pública do Olho Vivo só informa a posição atual dos ônibus. Para comparar 25/10 com 18/10 e com um dia útil, é preciso que a SPTrans entregue os registros operacionais desses dias. Este modelo pede esses dados pela Lei de Acesso à Informação.</p>
+<nav class="sub" aria-label="Nesta página"><a href="#texto">Texto do pedido</a><a href="#onde">Onde protocolar</a><a href="#depois">Depois do protocolo</a><a href="#judicial">Via judicial</a></nav>
+
+<h2 id="texto">Texto do pedido</h2>
+<div class="acoes"><button id="copiar" type="button">Copiar texto</button><a class="btn sec" href="pedido-sptrans.txt" download>Baixar .txt</a></div>
+<div class="card"><pre id="pedido">Ao Serviço de Informação ao Cidadão da São Paulo Transporte S.A. (SPTrans), com cópia à Secretaria Municipal de Mobilidade e Transportes.
+
+Assunto: Pedido de acesso a dados operacionais do transporte coletivo por ônibus nos dias 04/10/2026, 18/10/2026, 21/10/2026 e 25/10/2026 (Lei nº 12.527/2011).
+
+Com base na Lei de Acesso à Informação (Lei nº 12.527/2011), na Lei nº 13.460/2017 e na decisão do TRE-SP de 24/10/2026 que determinou a operação integral da frota no dia 25/10/2026, solicito cópia dos dados abaixo, em formato aberto e legível por máquina (CSV, JSON ou Parquet), sem campos pessoais:
+
+1. Registros brutos de posicionamento (GPS/AVL) de todos os veículos do sistema, com identificador do veículo, linha, sentido, empresa operadora, data, hora, latitude e longitude, nos dias 04/10/2026 (domingo, primeiro turno), 18/10/2026 (domingo), 21/10/2026 (quarta-feira, dia útil de referência) e 25/10/2026 (domingo, segundo turno).
+
+2. Frota programada e frota efetivamente operada, por linha, empresa e faixa horária de uma hora, nos mesmos dias, incluindo a frota total exigida pela decisão judicial e o critério usado para calculá-la.
+
+3. Viagens programadas, realizadas e suprimidas, por linha, empresa e faixa horária, nos mesmos dias, com o motivo registrado para cada supressão.
+
+4. Intervalos programados e efetivamente praticados entre veículos (mediana e percentil 90), por linha e faixa horária, das 5h às 24h, nos mesmos dias.
+
+5. Registros de saída e recolhimento de veículos de cada garagem, com horário, nos mesmos dias.
+
+6. Comunicações, ordens de serviço e planos operacionais expedidos pela SPTrans e pela Secretaria Municipal de Mobilidade e Transportes às empresas operadoras sobre a operação de 25/10/2026, incluindo o cronograma de reorganização da frota após a decisão do TRE-SP.
+
+7. Demonstrativo de passageiros transportados por linha nos mesmos dias, com a separação entre pagantes e gratuidades, caso ainda não publicado.
+
+8. As definições formais usadas pela SPTrans para "frota patrimonial", "frota operacional", "frota monitorada", "frota em circulação" e "frota operante", e o texto da Carta Circular DT/SRT nº 005/2026, de 24/10/2026.
+
+Havendo dado que a SPTrans entenda sigiloso, peço a disponibilização da parte não sigilosa e a indicação do dispositivo legal que fundamenta a restrição, conforme o art. 7º, § 2º, da Lei nº 12.527/2011. Peço também que os dados sejam enviados por meio eletrônico, nos termos do art. 11, § 5º.
+
+Prazo legal de resposta: 20 dias, prorrogáveis por mais 10 mediante justificativa (art. 11, §§ 1º e 2º).
+
+Nome do solicitante: [NOME]
+Contato: [E-MAIL]
+Data: [DATA]
+</pre></div>
+<p>Antes de enviar, preencha os campos entre colchetes. O 21/10 (quarta-feira) foi escolhido como dia útil de referência, e você pode trocar por outro.</p>
+
+<h2 id="onde">Onde protocolar</h2>
+<ul>
+<li>Sistema de pedidos de acesso à informação da Prefeitura de São Paulo (e-SIC), endereçado à SPTrans. Confira o endereço atual no portal da Prefeitura, em Acesso à Informação.</li>
+<li>Em paralelo, o SIC da própria SPTrans e a Ouvidoria, para deixar registro duplo.</li>
+<li>Guarde o número de protocolo e uma captura da tela de confirmação.</li>
+</ul>
+
+<h2 id="depois">Depois do protocolo</h2>
+<ul>
+<li>A resposta tem prazo de 20 dias, prorrogáveis por mais 10 com justificativa.</li>
+<li>Se a resposta for negada ou incompleta, cabe recurso à autoridade superior em 10 dias, e depois à Controladoria Geral do Município.</li>
+<li>Publique no painel os dados recebidos, para que a comparação com a coleta própria fique aberta a qualquer pessoa conferir.</li>
+</ul>
+
+<h2 id="judicial">Via judicial</h2>
+<div class="aviso">Como já existe decisão do TRE-SP sobre a operação de 25/10, quem for parte no processo (campanha, partido ou Ministério Público Eleitoral) pode pedir que a SPTrans apresente esses mesmos dados nos autos, com prazo curto e multa por descumprimento. O pedido administrativo acima não substitui esse caminho. Os dois podem correr juntos. Este texto não é aconselhamento jurídico, e vale uma revisão por advogada ou advogado antes do envio.</div>
+</main>
+<script>
+document.getElementById("copiar").onclick = async function () {
+  const t = document.getElementById("pedido").textContent;
+  try { await navigator.clipboard.writeText(t); this.textContent = "Copiado"; }
+  catch (e) { const r = document.createRange(); r.selectNodeContents(document.getElementById("pedido")); getSelection().removeAllRanges(); getSelection().addRange(r); this.textContent = "Selecione e copie (Ctrl+C)"; }
+};
+</script>
+</body></html>
