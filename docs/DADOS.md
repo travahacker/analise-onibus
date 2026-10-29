@@ -31,6 +31,7 @@ Observação: `snap.linhas` conta letreiros em movimento só nas coletas feitas 
 - `series.json`: `{gerado, janela, coletas, primeira, ultima, ultima_coleta, dias: [{data, dow, serie: [{h, mov, fres, lin, op, mv, z}]}]}`. `h` é a hora local decimal do início da janela (16.5 = 16h30). `op` = ônibus operando (média das coletas da janela), `mv` = em movimento (média, só coletas espaçadas de 90 s a 10 min), `lin` = letreiros distintos em movimento, `z` = ônibus em movimento por zona.
 - `linhas.json`: `{AAAA-MM-DD: {letreiro: média de ônibus em movimento na janela de votação}}`.
 - `gtfs_ref.json`: `{tipos: {util|sabado|domingo: {linhas, rotas: [route_id]}}}`, linhas com serviço programado por tipo de dia.
+- `comparacao.json`: o dia do evento (`ONIBUS_EVENTO`) comparado aos dias úteis, só nas janelas de 10 minutos em que o evento foi medido. Entram como referência os dias úteis (seg a sex, fora de `FERIADOS` em `agregar.py`) que cobrem pelo menos 95% dessa janela. Campos: `janela` (início, fim e número de janelas), `uteis` (datas de referência), `onibus_operando`, `em_movimento` e `linhas_ativas_por_janela` (cada um com `evento`, `media_uteis`, `razao`, `por_dia`, e `por_hora` para o primeiro) e `linhas` (letreiros em movimento no total, entre as linhas que só existem em dia útil, e a lista `ausentes_na_eleicao`: linhas com ônibus em movimento em todos os dias úteis e em nenhuma janela do evento).
 - `manifesto.json`: os 50 últimos registros do manifesto, para conferência pública.
 
 ## Formato da API de origem

@@ -101,5 +101,46 @@ class PontaAPonta(unittest.TestCase):
             srv.server_close()
 
 
+class Comparacao(unittest.TestCase):
+    """O evento é comparado com dias úteis, só nas horas em que o evento foi medido."""
+
+    def test_razao_e_linhas_ausentes(self):
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        sp = ZoneInfo("America/Sao_Paulo")
+        agr = carregar("agregar")
+        with tempfile.TemporaryDirectory() as d:
+            agr.DATA, agr.OUT, agr.EVENTO = d, os.path.join(d, "out"), "2026-10-25"
+            con = sqlite3.connect(os.path.join(d, "db.sqlite"))
+            con.executescript("""
+                CREATE TABLE snap(ts INTEGER PRIMARY KEY, total INTEGER, frescos INTEGER, movidos INTEGER, linhas INTEGER, sha TEXT);
+                CREATE TABLE pos(p INTEGER PRIMARY KEY, lat REAL, lon REAL, ts INTEGER);
+                CREATE TABLE veic(bucket INTEGER, p INTEGER, cl INTEGER, c TEXT, zona TEXT, movido INTEGER, PRIMARY KEY(bucket,p));""")
+            # dia do evento (domingo): 2 linhas, 100 ônibus operando. Dias úteis (seg, ter): 3 linhas, 200 ônibus operando.
+            casos = [("2026-10-25", ["A-10", "B-10"], 100), ("2026-10-26", ["A-10", "B-10", "C-10"], 200), ("2026-10-27", ["A-10", "B-10", "C-10"], 200)]
+            for dia, linhas, operando in casos:
+                meia_noite = int(datetime.strptime(dia, "%Y-%m-%d").replace(tzinfo=sp).timestamp())
+                for k in range(102, 108):  # 17h00 às 17h50
+                    b = meia_noite + k * 600
+                    con.execute("INSERT INTO snap VALUES(?,?,?,?,?,?)", (b + 60, operando, operando, operando // 2, len(linhas), "x"))
+                    for i, c in enumerate(linhas * 3):
+                        con.execute("INSERT INTO veic VALUES(?,?,?,?,?,?)", (b, i, i, c, "Centro", 1))
+            con.commit(); con.close()
+            agr.main()
+            with open(os.path.join(d, "out", "comparacao.json")) as f:
+                c = json.load(f)
+        self.assertEqual(c["uteis"], ["2026-10-26", "2026-10-27"])
+        self.assertEqual(c["janela"]["janelas"], 6)
+        self.assertEqual(c["onibus_operando"]["evento"], 100)
+        self.assertEqual(c["onibus_operando"]["media_uteis"], 200)
+        self.assertAlmostEqual(c["onibus_operando"]["razao"], 0.5)
+        self.assertEqual(c["linhas"]["ausentes_na_eleicao"]["letreiros"], ["C-10"])
+        self.assertEqual((c["linhas"]["ausentes_na_eleicao"]["quantidade"], c["linhas"]["ausentes_na_eleicao"]["de"]), (1, 3))
+
+    def test_feriado_nao_vale_como_dia_util(self):
+        agr = carregar("agregar")
+        self.assertIn("2026-11-02", agr.FERIADOS)
+
+
 if __name__ == "__main__":
     unittest.main()

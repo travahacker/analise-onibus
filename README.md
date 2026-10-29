@@ -23,14 +23,16 @@ No segundo turno de 2026 (25/10), a Justiça Eleitoral mandou a Prefeitura de S�
 
 ## O que foi encontrado em 25/10/2026
 
-Resumo do painel nessa data, com as fontes. O painel publicado é a versão que vale.
+Resumo do painel, atualizado em 29/10/2026, com as fontes. O painel publicado é a versão que vale.
 
-- **Cebrap** (mesma API pública): entre 11h e 14h circularam em média 31,4% menos ônibus ao mesmo tempo que nos dias úteis da mesma semana ([Metrópoles](https://www.metropoles.com/sao-paulo/periferias-onde-lula-venceu-sao-as-mais-afetadas-por-falta-de-onibus-em-sp)). Sem dados públicos.
+- **Esta coleta**, de 16h30 à meia-noite de 25/10, comparada janela por janela aos dias úteis 26, 27 e 28/10 pelo mesmo método: em média **6,1 mil ônibus operando contra 9,4 mil** (64% do nível de dia útil, e em todas as horas entre 63% e 70%). Ônibus em movimento: 54% do nível de dia útil. Linhas com ônibus em movimento por janela: 95% (1.006 contra 1.055). A rede quase toda rodou, com menos ônibus por linha.
+- **Cebrap** (mesma API pública, outras horas): entre 11h e 14h circularam em média 31,4% menos ônibus ao mesmo tempo que nos dias úteis da mesma semana ([Metrópoles](https://www.metropoles.com/sao-paulo/periferias-onde-lula-venceu-sao-as-mais-afetadas-por-falta-de-onibus-em-sp)). Sem dados públicos.
 - **BusInfo** (método não divulgado): cerca de 71% da frota em circulação às 13h20 (71,7%, [Diário Carioca](https://www.diariocarioca.com/2026/10/25/politica/eleicoes/boulos-pedira-prisao-de-ricardo-nunes-por-frota-reduzida-em-sp/)) e às 14h40 (71%, [Brasil 247](https://www.brasil247.com/sudeste/sao-paulo-tem-apenas-71-dos-onibus-em-circulacao-diz-levantamento/)). O Instituto Pólis considera o mínimo esperado 85%.
-- **Esta coleta**, a partir das 16h30: 58% das linhas que só existem em dia útil tinham ônibus em movimento, contra 84% das linhas de domingo no mesmo período.
 - **Plano da própria Prefeitura:** cerca de 6,9 mil ônibus, nível de sábado ([Gazeta SP](https://www.gazetasp.com.br/cotidiano/sao-paulo-aumenta-frota-de-onibus-em-40-para-o-segundo-turno-das-eleicoes-e-tera-69-mil-veiculos-com-passagem-gratuita/)).
 
-Conclusão do painel: os sinais convergem para menos ônibus do que o nível de dia útil exigido, com confiança média a alta quanto à direção e média quanto ao tamanho. **O projeto não conclui** se houve descumprimento da ordem (decisão da Justiça) nem a intenção de ninguém. A coleta só começou às 16h30 de 25/10, então a manhã não foi medida por nós.
+Conclusão do painel: no período medido circularam cerca de 36% menos ônibus do que num dia útil, com confiança alta para essa faixa horária (mesmo método nos dois lados) e média para o restante do dia, que depende de medições de terceiros. **O projeto não conclui** se houve descumprimento da ordem (decisão da Justiça) nem a intenção de ninguém. A coleta só começou às 16h30 de 25/10, então a manhã não foi medida por nós.
+
+> Uma primeira versão do painel (25/10) usava um indicador de linhas que comparava conjuntos diferentes (linhas só de dia útil contra linhas de domingo) e foi descartado quando houve dias úteis medidos para calibrá-lo. A comparação atual usa o mesmo método e a mesma faixa horária nos dois lados.
 
 ## Começar em 2 minutos, sem credenciais
 
@@ -79,6 +81,7 @@ Agende com cron (exemplo em `servidor/analise-onibus.cron`):
 | `ONIBUS_DATA` | Pasta de dados brutos e SQLite (padrão `/var/lib/analise-onibus`) |
 | `ONIBUS_OUT` | Pasta dos JSON do painel |
 | `OLHOVIVO_BASE` | Sobrescreve a URL base da API (usado nos testes e no `demo.sh`) |
+| `ONIBUS_EVENTO` | Data (AAAA-MM-DD) do dia a comparar com os dias úteis em `comparacao.json` (padrão 2026-10-25) |
 
 Espaço em disco: cada coleta comprimida pesa cerca de 0,9 MB, ou perto de 650 MB por dia. O coletor para sozinho se restarem menos de 5 GB livres.
 

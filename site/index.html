@@ -126,7 +126,7 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:22px 0 56px;colo
 </div>
 
 <section id="placar">
-  <div class="veredito" id="veredito"><span class="tag">Conclusão de hoje</span><h2>Carregando…</h2></div>
+  <div class="veredito" id="veredito"><span class="tag">Conclusão</span><h2>Carregando…</h2></div>
   <div class="grid3" id="placar-cards" style="margin-top:14px"></div>
 </section>
 
@@ -155,9 +155,9 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:22px 0 56px;colo
 
 <section id="linhas">
   <h2>Quais linhas</h2>
-  <p class="sub">O GTFS oficial da SPTrans diz quais linhas deveriam operar em dia útil. Aqui cruzamos isso com o que o GPS mostrou hoje.</p>
+  <p class="sub">Comparamos as linhas com ônibus em movimento na mesma faixa horária, no domingo da eleição e nos dias úteis da mesma semana.</p>
   <div class="card">
-    <h3 style="margin:0 0 6px;font-size:1rem">Linhas de dia útil sem ônibus em movimento hoje</h3>
+    <h3 style="margin:0 0 6px;font-size:1rem">Linhas que rodaram nos dias úteis e não rodaram na eleição</h3>
     <strong id="semn"></strong>
     <p class="explica" id="semt"></p>
     <details><summary>Ver lista de linhas</summary><p id="sem"></p></details>
@@ -173,15 +173,15 @@ footer{border-top:1px solid var(--line);margin-top:56px;padding:22px 0 56px;colo
       <ul><li><b>Operando:</b> ônibus ligados a uma linha, com posição atualizada nos últimos 3 minutos, vistos ao mesmo tempo. É uma foto simultânea, não o total que rodou no dia. Inclui ônibus parados em ponto final (conferido: cerca de 35% ficam parados entre duas coletas, e 90% dos que não saem do lugar em 22 minutos estão a menos de 300 m de um terminal) e exclui garagem e ônibus sem GPS.</li>
       <li><b>Em movimento:</b> ônibus operando que se deslocaram ao menos 50 m desde a coleta anterior.</li>
       <li><b>Linha ativa:</b> um letreiro de linha (por exemplo 8000-10) com ao menos um ônibus em movimento em uma janela de 10 minutos.</li></ul></li>
-    <li><b>Medimos quais linhas rodaram.</b> Do GTFS oficial da SPTrans (<a href="codigo/atualizar_gtfs.sh.txt">baixado todo dia e guardado</a>) tiramos as linhas programadas para dia útil (1.325) e para domingo (1.025). Cerca de 300 linhas existem em dia útil e não no domingo. Se a ordem fosse cumprida, essas linhas deveriam estar rodando hoje. Contamos quantas tiveram ônibus em movimento entre 8h e 17h e fazemos a mesma conta para as linhas de domingo, que rodariam de qualquer jeito. A diferença entre os dois percentuais é o sinal. O percentual sobe com mais horas medidas, porque uma linha de intervalo longo pode não aparecer numa janela curta, e hoje só temos medição a partir das 16h30.</li>
+    <li><b>Comparamos a eleição com os dias úteis.</b> Escolhemos a faixa horária em que o dia da eleição foi medido (16h30 à meia-noite) e os dias úteis completos da mesma semana, deixando feriados de fora. Para cada janela de 10 minutos calculamos ônibus operando, ônibus em movimento e linhas ativas, e comparamos as médias, hora a hora, com o mesmo método nos dois lados. Do GTFS oficial da SPTrans (<a href="codigo/atualizar_gtfs.sh.txt">baixado todo dia e guardado</a>) separamos as cerca de 300 linhas que existem em dia útil e não no domingo, e listamos as que rodaram em todos os dias úteis e não tiveram nenhum ônibus em movimento no domingo da eleição. Como o dia da eleição só foi medido a partir das 16h30, a manhã e o início da tarde não entram na nossa comparação.</li>
     <li><b>Usamos as medições de terceiros como foram publicadas.</b> Cebrap, BusInfo e o plano da Prefeitura entram com o que cada fonte diz medir, sem acesso aos dados deles e sem misturar os números, porque medem coisas diferentes. O BusInfo conta ônibus que "saíram da garagem", com método não divulgado. O Cebrap usa a mesma API que nós, mas compara com dias úteis e cobre a manhã. O nosso número é uma foto simultânea.</li>
-    <li><b>Só afirmamos o que várias medições sustentam.</b> Afirmamos uma direção quando fontes com métodos diferentes concordam e nenhuma indica o contrário. Aqui são quatro sinais, e por isso a direção tem confiança média a alta. O tamanho da diferença só vem do Cebrap (31,4%) e de um número do BusInfo (71%), então a confiança nele é menor. Não decidimos se houve descumprimento da ordem, que é uma decisão da Justiça, nem a intenção de ninguém.</li>
+    <li><b>Só afirmamos o que várias medições sustentam.</b> Afirmamos uma direção quando fontes com métodos diferentes concordam e nenhuma indica o contrário. Aqui temos a nossa comparação direta, com o mesmo método nos dois lados, e duas medições de terceiros (Cebrap e BusInfo) que apontam na mesma direção e com tamanho parecido. Por isso a confiança é alta para a faixa que medimos e média para o restante do dia, que depende de terceiros sem dados públicos. Não decidimos se houve descumprimento da ordem, que é uma decisão da Justiça, nem a intenção de ninguém.</li>
   </ol>
   <details open><summary>O que este painel não prova</summary>
-    <ul><li>Não medimos a manhã: nossa coleta começou às 16h30. Para esse período valem as medições de terceiros.</li>
-    <li>Só o Cebrap compara diretamente com dias úteis. O BusInfo e a nossa coleta são indícios por outros caminhos.</li>
-    <li>O número do BusInfo e o nosso não são comparáveis entre si.</li>
-    <li>Não há número oficial da SPTrans para hoje. Os dados oficiais podem ser pedidos <a href="pedido.html">por este modelo</a>.</li>
+    <ul><li>Nossa coleta começou às 16h30 de 25/10. Para a manhã e o início da tarde valem as medições de terceiros, que não publicam seus dados.</li>
+    <li>Os dias úteis de referência são de uma mesma semana, depois da eleição. Um domingo normal ainda será medido, e permitirá comparar também com um domingo sem eleição.</li>
+    <li>O número do BusInfo e o nosso medem coisas diferentes e não são comparáveis em valor absoluto.</li>
+    <li>Não há número oficial da SPTrans para o dia. Os dados oficiais podem ser pedidos <a href="pedido.html">por este modelo</a>.</li>
     <li>Menos ônibus não prova intenção de ninguém nem, sozinho, descumprimento da ordem judicial.</li></ul></details>
   <details><summary>Como conferir por conta própria</summary>
     <p>O código de coleta, agregação e leitura do GTFS está publicado como texto: <a href="codigo/coletor.py.txt">coletor</a>, <a href="codigo/agregar.py.txt">agregação</a>, <a href="codigo/gtfs_ref.py.txt">GTFS</a> e <a href="codigo/atualizar_gtfs.sh.txt">atualização do GTFS</a> e <a href="codigo/verificar_manifesto.py.txt">verificador da cadeia de hashes</a>. Os dados agregados que alimentam esta página são <a href="data/series.json">series.json</a>, <a href="data/linhas.json">linhas.json</a> e <a href="data/gtfs_ref.json">gtfs_ref.json</a>. Todo o projeto, com instruções para rodar, está em <a href="https://github.com/travahacker/analise-onibus">github.com/travahacker/analise-onibus</a>, sob licença MIT. Qualquer pessoa com uma chave da API Olho Vivo pode repetir a coleta.</p></details>
